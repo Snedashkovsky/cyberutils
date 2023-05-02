@@ -1,0 +1,67 @@
+[tool.poetry]
+name = "cyberutils"
+authors = ["Snedashkovsky, <sn@cyberdrop.ai>"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+description = "The Toolset for cyber protocol"
+documentation = "https://github.com/Snedashkovsky/cyberutils"
+homepage = "https://github.com/Snedashkovsky/cyberutils"
+keywords = ["bostrom", "cyber", "knowledge-graph", "dex", "swap", "defi", "crypto", "blockchain", ]
+license = "MIT"
+packages = [{ include = "cyberutils" }]
+readme = "README.md"
+repository = "https://github.com/Snedashkovsky/cyberutils.git"
+version = "0.0.1"
+
+[tool.poetry.dependencies]
+pandas = "^1.0.0"
+numpy = "^1.0.0"
+python-dotenv = "^0.20.0"
+tqdm = "^4.0.0"
+ipython = "^8.0.0"
+pandarallel = "^1.6.0"
+multiprocess = "^0.70.14"
+python = "^3.9"
+cyber_sdk = "^1.1.2"
+
+[tool.poetry.dev-dependencies]
+aioresponses = "^0.7.2"
+asynctest = "^0.13.0"
+pytest-cov = "^3.0.0"
+pytest = "^7.0.1"
+pip = "^22.0.3"
+Sphinx = "^4.4.0"
+sphinx-autobuild = "^2021.3.14"
+black = "^22.1.0"
+coverage = "^6.3.2"
+isort = "^5.10.1"
+mypy = "^0.931"
+pytest-mock = "^3.7.0"
+pytest-runner = "^5.3.1"
+pytest-sugar = "^0.9.4"
+sphinx-autodoc-typehints = "^1.17.0"
+uvloop = "^0.16.0"
+watchdog = "^2.1.6"
+wheel = "^0.38.4"
+flake8 = "^3.9.2"
+sphinx-rtd-theme = "^1.0.0"
+types-python-dateutil = "^2.8.9"
+
+[tool.pytest.ini_options]
+addopts = "-ra -q"
+minversion = "6.0"
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = "E203"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.1.0"]
