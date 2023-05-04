@@ -24,7 +24,7 @@ def execute_contract(execute_msgs: list[dict], wallet: Wallet, contract_address:
     :return: transaction result
     """
 
-    _create_links_msgs = \
+    _msgs = \
         [MsgExecuteContract(
             sender=wallet.key.acc_address,
             contract=AccAddress(contract_address),
@@ -32,7 +32,7 @@ def execute_contract(execute_msgs: list[dict], wallet: Wallet, contract_address:
 
     _tx_signed = wallet.create_and_sign_tx(
         CreateTxOptions(
-            msgs=_create_links_msgs,
+            msgs=_msgs,
             memo=memo,
             fee=Fee(gas, Coins([Coin(amount=fee_amount, denom=fee_denom)]))
         ))
@@ -40,7 +40,6 @@ def execute_contract(execute_msgs: list[dict], wallet: Wallet, contract_address:
     try:
         _tx_broadcasted = lcd_client.tx.broadcast(_tx_signed)
         return _tx_broadcasted
-
     except LCDResponseError as _e:
         print(f'LCDResponseError: {_e}')
         return None
