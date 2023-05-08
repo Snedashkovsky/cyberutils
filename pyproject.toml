@@ -30,6 +30,7 @@ pandarallel = "^1.6.0"
 multiprocess = "^0.70.14"
 python = "^3.9"
 cyber_sdk = "^1.1.2"
+gql = { version = "^3.0.0", extras = ["all"] }
 
 [tool.poetry.dev-dependencies]
 aioresponses = "^0.7.2"
