@@ -68,3 +68,32 @@ execute_contract(
     fee_denom='boot',
     memo='the first transfer')
 ```
+
+### execute a graphql query
+
+```python
+import pandas as pd
+
+from cyberutils.graphql import execute_graphql
+
+res = await execute_graphql(
+    request="""
+        query AllContracts {
+          contracts(order_by: {tx: desc_nulls_last}) {
+            address
+            admin
+            code_id
+            creation_time
+            creator
+            fees
+            gas
+            height
+            label
+            tx
+          }
+        }
+        """,
+    graphql_url='https://index.bostrom.cybernode.ai/v1/graphql')
+
+pd.DataFrame(res['contracts'])
+```
