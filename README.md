@@ -97,3 +97,31 @@ res = await execute_graphql(
 
 pd.DataFrame(res['contracts'])
 ```
+a query with variable values
+```python
+import pandas as pd
+
+from cyberutils.graphql import execute_graphql
+
+res = await execute_graphql(
+    request="""
+        query ContractsCodeID($code_id: bigint) {
+            contracts(order_by: {tx: desc_nulls_last}, where: {code_id: {_eq: $code_id}}) {
+                address
+                admin
+                creation_time
+                creator
+                fees
+                gas
+                height
+                label
+                tx
+                code_id
+            }
+        }
+        """,
+    variable_values={"code_id": "3"},
+    graphql_url='https://index.bostrom.cybernode.ai/v1/graphql')
+
+pd.DataFrame(res['contracts'])
+```
