@@ -97,3 +97,45 @@ res = await execute_graphql(
 
 pd.DataFrame(res['contracts'])
 ```
+a query with variable values
+```python
+import pandas as pd
+
+from cyberutils.graphql import execute_graphql
+
+res = await execute_graphql(
+    request="""
+        query ContractsCodeID($code_id: bigint) {
+            contracts(order_by: {tx: desc_nulls_last}, where: {code_id: {_eq: $code_id}}) {
+                address
+                admin
+                creation_time
+                creator
+                fees
+                gas
+                height
+                label
+                tx
+                code_id
+            }
+        }
+        """,
+    variable_values={"code_id": "3"},
+    graphql_url='https://index.bostrom.cybernode.ai/v1/graphql')
+
+pd.DataFrame(res['contracts'])
+```
+get messages with a given address and type
+```python
+import pandas as pd
+
+from cyberutils.graphql import get_messages_by_address_and_type
+
+
+res = await get_messages_by_address_and_type(
+    address='bostrom1xszmhkfjs3s00z2nvtn7evqxw3dtus6yr8e4pw',
+    msg_type='cosmos.bank.v1beta1.MsgSend',
+    graphql_url='https://index.bostrom.cybernode.ai/v1/graphql')
+
+pd.DataFrame(res)
+```
