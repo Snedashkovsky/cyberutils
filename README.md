@@ -125,3 +125,17 @@ res = await execute_graphql(
 
 pd.DataFrame(res['contracts'])
 ```
+get messages with a given address and type
+```python
+import pandas as pd
+
+from cyberutils.graphql import get_messages_by_address_and_type
+
+
+res = await get_messages_by_address_and_type(
+    address='bostrom1xszmhkfjs3s00z2nvtn7evqxw3dtus6yr8e4pw',
+    msg_type='cosmos.bank.v1beta1.MsgSend',
+    graphql_url='https://index.bostrom.cybernode.ai/v1/graphql')
+
+pd.DataFrame(res)
+```
