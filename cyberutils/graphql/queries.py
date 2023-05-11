@@ -29,9 +29,13 @@ async def get_messages_by_address_and_type(address: str,
                     message_involved_addresses: involved_accounts_addresses
                     transaction_hash
                     transaction {
-                      success
-                      memo
-                      signer_infos
+                        success
+                        memo
+                        signer_infos
+                        block {
+                            height
+                            timestamp
+                        }
                     }
                 }
             }
