@@ -10,7 +10,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
 ]
-description = "The Toolset for cyber protocol and cosmos ecosystem"
+description = "the toolset for cyber protocol and cosmos ecosystem"
 documentation = "https://github.com/Snedashkovsky/cyberutils"
 homepage = "https://github.com/Snedashkovsky/cyberutils"
 keywords = ["bostrom", "cyber", "knowledge-graph", "dex", "swap", "defi", "crypto", "blockchain", ]
@@ -18,7 +18,7 @@ license = "MIT"
 packages = [{ include = "cyberutils" }]
 readme = "README.md"
 repository = "https://github.com/Snedashkovsky/cyberutils.git"
-version = "0.0.3"
+version = "0.0.4"
 
 [tool.poetry.dependencies]
 pandas = "^1.0.0"
