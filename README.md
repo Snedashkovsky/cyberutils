@@ -32,6 +32,8 @@ get_json_from_bash_query(
 ### execute a cosmwasm contract
 
 ```python
+import requests
+
 from cyber_sdk.client.lcd import LCDClient
 from cyber_sdk.key.mnemonic import MnemonicKey
 
@@ -49,13 +51,19 @@ lcd_client = LCDClient(
 )
 wallet = lcd_client.wallet(mk)
 
-# the execution message in a contract must match its schema
+# an execution message in a contract must match its schema
 execute_msg = {
     "transfer" :  {
         "recipient": "bostrom1xszmhkfjs3s00z2nvtn7evqxw3dtus6yr8e4pw",
         "amount": "1000000"
     }
 }
+
+# load a contract schema for an execute message validation
+contract_schema_json = \
+    requests.get(
+        url='https://raw.githubusercontent.com/Snedashkovsky/cw-plus/main/contracts/cw20-base/schema/cw20-base.json'
+    ).json()
 
 # execution of a contract
 execute_contract(
@@ -66,6 +74,7 @@ execute_contract(
     gas=500_000,
     fee_amount=0,
     fee_denom='boot',
+    contract_execute_schema=contract_schema_json['execute'],
     memo='the first transfer')
 ```
 

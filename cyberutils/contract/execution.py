@@ -1,3 +1,4 @@
+from jsonschema import validate
 from typing import Optional, Union
 
 from cyber_sdk.client.lcd import LCDClient
@@ -19,6 +20,7 @@ def execute_contract(execute_msgs: list[dict],
                      wallet: Optional[Wallet] = None,
                      sender: Optional[Union[str, AccAddress]] = None,
                      sign_and_broadcast_tx: bool = True,
+                     contract_execute_schema: Optional[dict] = None,
                      memo: Optional[str] = None) -> Optional[Union[BlockTxBroadcastResult, Tx]]:
     """
     Execute contract list of messages for a contract in a transaction or get an unsigned transaction
@@ -31,10 +33,15 @@ def execute_contract(execute_msgs: list[dict],
     :param wallet: executable wallet
     :param sender: transaction sender address
     :param sign_and_broadcast_tx: sign and broadcast a transaction if true, otherwise return an unsigned transaction
+    :param contract_execute_schema: schema of contract execute messages for message validation
     :param memo: note(memo) of a transaction
     :return: a transaction result or an unsigned transaction
     """
     assert ((wallet or sender) and not sign_and_broadcast_tx) or (wallet and sign_and_broadcast_tx)
+    if contract_execute_schema:
+        for _execute_msg in execute_msgs:
+            validate(_execute_msg, contract_execute_schema)
+
     _sender = wallet.key.acc_address if sender is None else AccAddress(sender)
     _msgs = \
         [MsgExecuteContract(
