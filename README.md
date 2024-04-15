@@ -78,6 +78,23 @@ execute_contract(
     memo='the first transfer')
 ```
 
+### query a cosmwasm contract
+
+```python
+from cyberutils.contract import query_contract
+
+query_contract(
+    query={
+        'get_asset': {
+            'chain_name': 'osmosis',
+            'base': 'ibc/FE2CD1E6828EC0FAB8AF39BAC45BC25B965BA67CCBC50C13A14BD610B0D1E2C4'
+        }
+    },
+    contract_address='bostrom1w33tanvadg6fw04suylew9akcagcwngmkvns476wwu40fpq36pms92re6u',
+    node_lcd_url='https://lcd.bostrom.cybernode.ai'
+)
+```
+
 ### execute a graphql query
 
 ```python
