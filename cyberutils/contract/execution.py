@@ -23,7 +23,8 @@ def execute_contract(execute_msgs: list[dict],
                      contract_execute_schema: Optional[dict] = None,
                      memo: Optional[str] = None) -> Optional[Union[BlockTxBroadcastResult, Tx]]:
     """
-    Execute contract list of messages for a contract in a transaction or get an unsigned transaction
+    Execute contract list of messages for a contract in a transaction or get an unsigned transaction.
+    You can validate messages by contract execute schema.
     :param execute_msgs: list of execute messages
     :param contract_address: contract address
     :param lcd_client: network LCD client
@@ -34,7 +35,7 @@ def execute_contract(execute_msgs: list[dict],
     :param sender: transaction sender address
     :param sign_and_broadcast_tx: sign and broadcast a transaction if true, otherwise return an unsigned transaction
     :param contract_execute_schema: schema of contract execute messages for message validation
-    :param memo: note(memo) of a transaction
+    :param memo: transaction note(memo)
     :return: a transaction result or an unsigned transaction
     """
     assert ((wallet or sender) and not sign_and_broadcast_tx) or (wallet and sign_and_broadcast_tx)
@@ -47,7 +48,7 @@ def execute_contract(execute_msgs: list[dict],
         [MsgExecuteContract(
             sender=_sender,
             contract=AccAddress(contract_address),
-            execute_msg=execute_msg) for execute_msg in execute_msgs]
+            msg=execute_msg) for execute_msg in execute_msgs]
 
     if sign_and_broadcast_tx is False:
         return lcd_client.tx.create(
